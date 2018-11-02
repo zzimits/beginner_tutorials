@@ -1,4 +1,4 @@
-Copyright 2018 Zachary Zimits
+// Copyright 2018 Zachary Zimits
 
 #include <sstream>
 #include "ros/ros.h"
@@ -61,7 +61,7 @@ int main(int argc, char **argv) {
     std_msgs::String msg;
 
     std::stringstream ss;
-    ss << "Zach Zimits has completed the tutorials!" << count;
+    ss << "Zach Zimits" << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());

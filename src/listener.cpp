@@ -1,4 +1,4 @@
-Copyright 2018 Zachary Zimits
+// Copyright 2018 Zachary Zimits
 
 #include "ros/ros.h"
 #include "std_msgs/String.h"
