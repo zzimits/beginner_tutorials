@@ -50,13 +50,13 @@ find_package(catkin REQUIRED COMPONENTS
 ## Generate messages in the 'msg' folder
 # generate_message_files(
 # FILES
-# AddTwoInts.srv
+# EditTalker.srv
 # )
 
 ## Generate services in the 'srv' folder
  add_service_files(
    FILES
-   AddTwoInts.srv
+   EditTalker.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -205,10 +205,10 @@ add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 add_dependencies(listener beginner_tutorials_generate_messages_cpp)
 
-add_executable(add_two_ints_server src/add_two_ints_server.cpp)
-target_link_libraries(add_two_ints_server ${catkin_LIBRARIES})
-add_dependencies(add_two_ints_server beginner_tutorials_gencpp)
+add_executable(edit_talker_server src/edit_talker_server.cpp)
+target_link_libraries(edit_talker_server ${catkin_LIBRARIES})
+add_dependencies(edit_talker_server beginner_tutorials_gencpp)
 
-add_executable(add_two_ints_client src/add_two_ints_client.cpp)
-target_link_libraries(add_two_ints_client ${catkin_LIBRARIES})
-add_dependencies(add_two_ints_client beginner_tutorials_gencpp)
+add_executable(edit_talker_client src/edit_talker_client.cpp)
+target_link_libraries(edit_talker_client ${catkin_LIBRARIES})
+add_dependencies(edit_talker_client beginner_tutorials_gencpp)
