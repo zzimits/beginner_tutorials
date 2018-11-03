@@ -54,14 +54,16 @@ int main(int argc, char **argv) {
    * a unique string for each message.
    */
   int count = 0;
+  n.setParam("relative_param", "This is my message");
   while (ros::ok()) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
     std_msgs::String msg;
-
     std::stringstream ss;
-    ss << "Zach Zimits" << count;
+    std::string my_string;
+    n.getParam("relative_param", my_string);
+    ss << my_string << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());

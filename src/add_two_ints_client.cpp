@@ -5,20 +5,20 @@
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "add_two_ints_client");
-  if (argc != 3)
+  if (argc != 2)
   {
-    ROS_INFO("usage: add_two_ints_client X Y");
+    ROS_INFO("usage: add_two_ints_client X");
     return 1;
   }
 
   ros::NodeHandle n;
   ros::ServiceClient client = n.serviceClient<beginner_tutorials::AddTwoInts>("add_two_ints");
   beginner_tutorials::AddTwoInts srv;
-  srv.request.a = atoll(argv[1]);
-  srv.request.b = atoll(argv[2]);
+  srv.request.a = argv[1];
   if (client.call(srv))
   {
-    ROS_INFO("Sum: %ld", (long int)srv.response.sum);
+      std::string respo = srv.response.b;
+	  ROS_INFO("Talker has been changed to: %s",respo);
   }
   else
   {
