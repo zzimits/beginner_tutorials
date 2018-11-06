@@ -12,6 +12,7 @@ Begin by cloning the directory into the src directory of your catkin workspace.
 ```
 cd /<path to catkin_ws>/src
 git clone https://github.com/zzimits/beginner_tutorials
+git checkout Week10_HW
 cd ~/catkin_ws
 . ~/catkin_ws/devel/setup.bash
 catkin_make
