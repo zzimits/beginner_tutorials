@@ -4,7 +4,7 @@
   <version>0.0.0</version>
   <description>The beginner_tutorials package</description>
 
-  <maintainer email="zachary@zimits.com">Zach Zimits</maintainer>
+  <maintainer email="zachary@zimits.com">Zachary Zimits</maintainer>
   <license>BSD</license>
   <url type="website">http://wiki.ros.org/beginner_tutorials</url>
   <author email="zachary@zimits.com">Zachary Zimits</author> -->
