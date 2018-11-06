@@ -1,3 +1,8 @@
-Done processing ./src/talker.cpp
-Done processing ./src/listener.cpp
+Done processing talker.cpp
+Done processing listener.cpp
+Done processing edit_talker_client.cpp
+edit_talker_server.cpp:6:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::EditTalker::Request  &req  [runtime/references] [2]
+edit_talker_server.cpp:7:  Is this a non-const reference? If so, make const or use a pointer: beginner_tutorials::EditTalker::Response &res  [runtime/references] [2]
+Done processing edit_talker_server.cpp
+Total errors found: 2
 
