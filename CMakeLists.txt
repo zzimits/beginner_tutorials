@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 2.8.3)
 project(beginner_tutorials)
 
 ## Compile as C++11, supported in ROS Kinetic and newer
-# add_compile_options(-std=c++11)
+add_compile_options(-std=c++11)
 
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
@@ -11,6 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
   std_msgs
+  message_generation
 )
 
 ## System dependencies are found with CMake's conventions
@@ -47,18 +48,16 @@ find_package(catkin REQUIRED COMPONENTS
 ##   * add every package in MSG_DEP_SET to generate_messages(DEPENDENCIES ...)
 
 ## Generate messages in the 'msg' folder
-# add_message_files(
-#   FILES
-#   Message1.msg
-#   Message2.msg
+# generate_message_files(
+# FILES
+# EditTalker.srv
 # )
 
 ## Generate services in the 'srv' folder
-# add_service_files(
-#   FILES
-#   Service1.srv
-#   Service2.srv
-# )
+ add_service_files(
+   FILES
+   EditTalker.srv
+ )
 
 ## Generate actions in the 'action' folder
 # add_action_files(
@@ -68,10 +67,10 @@ find_package(catkin REQUIRED COMPONENTS
 # )
 
 ## Generate added messages and services with any dependencies listed here
-# generate_messages(
-#   DEPENDENCIES
-#   std_msgs
-# )
+generate_messages(
+  DEPENDENCIES
+  std_msgs
+)
 
 ################################################
 ## Declare ROS dynamic reconfigure parameters ##
@@ -205,3 +204,11 @@ add_dependencies(talker beginner_tutorials_generate_messages_cpp)
 add_executable(listener src/listener.cpp)
 target_link_libraries(listener ${catkin_LIBRARIES})
 add_dependencies(listener beginner_tutorials_generate_messages_cpp)
+
+add_executable(edit_talker_server src/edit_talker_server.cpp)
+target_link_libraries(edit_talker_server ${catkin_LIBRARIES})
+add_dependencies(edit_talker_server beginner_tutorials_gencpp)
+
+add_executable(edit_talker_client src/edit_talker_client.cpp)
+target_link_libraries(edit_talker_client ${catkin_LIBRARIES})
+add_dependencies(edit_talker_client beginner_tutorials_gencpp)

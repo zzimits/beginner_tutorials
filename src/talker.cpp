@@ -1,5 +1,6 @@
-Copyright 2018 Zachary Zimits
+// Copyright 2018 Zachary Zimits
 
+#include <ros/console.h>
 #include <sstream>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
@@ -46,22 +47,29 @@ int main(int argc, char **argv) {
    * buffer up before throwing some away.
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
-
-  ros::Rate loop_rate(10);
+  int rate;  ///< the rate at which talker will publish
+  n.getParam("talker_rate", rate);  // Updates rate from the ROS Parameter
+  ROS_FATAL_COND(rate == 0, "Rate = 0, no messages will be published");
+  ros::Rate loop_rate(rate);
 
   /**
    * A count of how many messages we have sent. This is used to create
    * a unique string for each message.
    */
   int count = 0;
+  n.setParam("relative_param", "");
   while (ros::ok()) {
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */
     std_msgs::String msg;
-
     std::stringstream ss;
-    ss << "Zach Zimits has completed the tutorials!" << count;
+    std::string my_string;  ///< the message that will be sent by talker
+    ROS_DEBUG_STREAM("Before accessing ROS::PARAM my_string=" << my_string);
+    n.getParam("relative_param", my_string);  // Updates my_string
+    ROS_DEBUG_STREAM("After accessing ROS::PARAM my_string=" << my_string);
+    ROS_WARN_COND(my_string == "", "my_string is empty");
+    ss << my_string << count;
     msg.data = ss.str();
 
     ROS_INFO("%s", msg.data.c_str());
