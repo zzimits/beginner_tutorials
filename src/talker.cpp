@@ -2,15 +2,21 @@
 
 #include <ros/console.h>
 #include <sstream>
+#include <tf/transform_broadcaster.h>
+#include <turtlesim/Pose.h>
 #include "ros/ros.h"
 #include "std_msgs/String.h"
+
 
 
 /**
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
 int main(int argc, char **argv) {
-  /**
+  
+	
+  ros::init(argc, argv, "my_tf_broadcaster");
+	/**
    * The ros::init() function needs to see argc and argv so that it can perform
    * any ROS arguments and name remapping that were provided at the command line.
    * For programmatic remappings you can use a different version of init() which takes
@@ -21,14 +27,17 @@ int main(int argc, char **argv) {
    * part of the ROS system.
    */
   ros::init(argc, argv, "talker");
-
   /**
    * NodeHandle is the main access point to communications with the ROS system.
    * The first NodeHandle constructed will fully initialize this node, and the last
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
-
+  
+  tf::TransformBroadcaster br;
+  tf::Transform transform;
+  
+	
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -59,9 +68,13 @@ int main(int argc, char **argv) {
   int count = 0;
   n.setParam("relative_param", "");
   while (ros::ok()) {
+    transform.setOrigin( tf::Vector3(4.0, 2.0, 0.5) );
+    transform.setRotation( tf::Quaternion(4, .8, 7, 1) );
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talk_with_parent"));
+    
     /**
      * This is a message object. You stuff it with data, and then publish it.
-     */
+     */ 
     std_msgs::String msg;
     std::stringstream ss;
     std::string my_string;  ///< the message that will be sent by talker
