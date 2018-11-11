@@ -66,7 +66,7 @@ int main(int argc, char **argv) {
    * a unique string for each message.
    */
   int count = 0;
-  n.setParam("relative_param", "");
+  n.setParam("relative_param", "This is my message");
   while (ros::ok()) {
     transform.setOrigin( tf::Vector3(4.0, 2.0, 0.5) );
     transform.setRotation( tf::Quaternion(4, .8, 7, 1) );
