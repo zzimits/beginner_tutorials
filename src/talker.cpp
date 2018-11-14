@@ -27,10 +27,11 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGE.
 */
 
+
 #include <ros/console.h>
-#include <sstream>
 #include <tf/transform_broadcaster.h>
-#include <turtlesim/Pose.h>
+#include <sstream>
+
 #include "ros/ros.h"
 #include "std_msgs/String.h"
 
@@ -40,8 +41,6 @@ SUCH DAMAGE.
  * This tutorial demonstrates simple sending of messages over the ROS system.
  */
 int main(int argc, char **argv) {
-  
-	
   ros::init(argc, argv, "my_tf_broadcaster");
 	/**
    * The ros::init() function needs to see argc and argv so that it can perform
@@ -60,11 +59,11 @@ int main(int argc, char **argv) {
    * NodeHandle destructed will close down the node.
    */
   ros::NodeHandle n;
-  
+
   tf::TransformBroadcaster br;
   tf::Transform transform;
-  
-	
+
+
   /**
    * The advertise() function is how you tell ROS that you want to
    * publish on a given topic name. This invokes a call to the ROS
@@ -95,10 +94,11 @@ int main(int argc, char **argv) {
   int count = 0;
   n.setParam("relative_param", "This is my message");
   while (ros::ok()) {
-    transform.setOrigin( tf::Vector3(4.0, 2.0, 0.5) );
-    transform.setRotation( tf::Quaternion(4, .8, 7, 1) );
-    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "world", "talk_with_parent"));
-    
+    transform.setOrigin(tf::Vector3(4.0, 2.0, 0.5));
+    transform.setRotation(tf::Quaternion(4, .8, 7, 1));
+    br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
+      "world", "talk_with_parent"));
+
     /**
      * This is a message object. You stuff it with data, and then publish it.
      */ 

@@ -27,16 +27,14 @@ ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
 SUCH DAMAGE.
 */
 
-#include "ros/ros.h"
 #include <ros/service_client.h>
 #include <gtest/gtest.h>
 #include <beginner_tutorials/EditTalker.h>
-
+#include "ros/ros.h"
 
 std::shared_ptr<ros::NodeHandle> nh;
 
-TEST(TESTSuite, addTwoInts)
-{
+TEST(TESTSuite, addTwoInts) {
   ros::ServiceClient client = nh->serviceClient<beginner_tutorials::EditTalker>(
       "edit_talker");
   std::string mystring;
@@ -45,12 +43,10 @@ TEST(TESTSuite, addTwoInts)
   srv.request.a = new_value;
   ros::param::get("relative_param", mystring);
 
-  EXPECT_EQ(mystring,new_value);
+  EXPECT_EQ(mystring, new_value);
 }
 
-int main(int argc,
-         char **argv)
-{
+int main(int argc, char **argv) {
   ros::init(argc, argv, "add_two_ints_service_client");
   nh.reset(new ros::NodeHandle);
   testing::InitGoogleTest(&argc, argv);
