@@ -82,7 +82,7 @@ int main(int argc, char **argv) {
    * buffer up before throwing some away.
    */
   ros::Publisher chatter_pub = n.advertise<std_msgs::String>("chatter", 1000);
-  int rate;  ///< the rate at which talker will publish
+  int rate;  /**< the rate at which talker will publish */
   n.getParam("talker_rate", rate);  // Updates rate from the ROS Parameter
   ROS_FATAL_COND(rate == 0, "Rate = 0, no messages will be published");
   ros::Rate loop_rate(rate);
@@ -94,8 +94,8 @@ int main(int argc, char **argv) {
   int count = 0;
   n.setParam("relative_param", "This is my message");
   while (ros::ok()) {
-    transform.setOrigin(tf::Vector3(4.0, 2.0, 0.5));
-    transform.setRotation(tf::Quaternion(4, .8, 7, 1));
+    transform.setOrigin(tf::Vector3(4.0, 2.0, 0.5));  /**< orgin of the transform */
+    transform.setRotation(tf::Quaternion(4, .8, 7, 1));  /**< rotation of the transform*/
     br.sendTransform(tf::StampedTransform(transform, ros::Time::now(),
       "world", "talk_with_parent"));
 
@@ -104,9 +104,9 @@ int main(int argc, char **argv) {
      */ 
     std_msgs::String msg;
     std::stringstream ss;
-    std::string my_string;  ///< the message that will be sent by talker
+    std::string my_string;  /**< the message that will be sent by talker */
     ROS_DEBUG_STREAM("Before accessing ROS::PARAM my_string=" << my_string);
-    n.getParam("relative_param", my_string);  // Updates my_string
+    n.getParam("relative_param", my_string);  /**< Updates my_string */
     ROS_DEBUG_STREAM("After accessing ROS::PARAM my_string=" << my_string);
     ROS_WARN_COND(my_string == "", "my_string is empty");
     ss << my_string << count;
