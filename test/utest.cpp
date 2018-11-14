@@ -28,24 +28,31 @@ SUCH DAMAGE.
 */
 
 #include "ros/ros.h"
-#include "beginner_tutorials/EditTalker.h"
+#include <ros/service_client.h>
+#include <gtest/gtest.h>
+#include <beginner_tutorials/EditTalker.h>
 
-bool add(beginner_tutorials::EditTalker::Request  &req,
-    beginner_tutorials::EditTalker::Response &res) {
-  std::string my_string = req.a;
-  res.b = my_string;
-  ROS_INFO("I am changing talker to: %s", my_string);
-  ros::param::set("relative_param", my_string);
-  return true;
+
+std::shared_ptr<ros::NodeHandle> nh;
+
+TEST(TESTSuite, addTwoInts)
+{
+  ros::ServiceClient client = nh->serviceClient<beginner_tutorials::EditTalker>(
+      "edit_talker");
+  std::string mystring;
+  beginner_tutorials::EditTalker srv;
+  std::string new_value = "This is my message";
+  srv.request.a = new_value;
+  ros::param::get("relative_param", mystring);
+
+  EXPECT_EQ(mystring,new_value);
 }
 
-int main(int argc, char **argv) {
-  ros::init(argc, argv, "edit_talker_server");
-  ros::NodeHandle n;
-  ROS_INFO("Ready to edit talker");
-  ros::ServiceServer service = n.advertiseService("edit_talker", add);
-
-  ros::spin();
-
-  return 0;
+int main(int argc,
+         char **argv)
+{
+  ros::init(argc, argv, "add_two_ints_service_client");
+  nh.reset(new ros::NodeHandle);
+  testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
 }
