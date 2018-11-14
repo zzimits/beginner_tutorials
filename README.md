@@ -12,7 +12,8 @@ Begin by cloning the directory into the src directory of your catkin workspace.
 ```
 cd /<path to catkin_ws>/src
 git clone https://github.com/zzimits/beginner_tutorials
-git checkout Week10_HW
+cd ./beginner_tutorials
+git checkout Week11_HW
 cd ~/catkin_ws
 . ~/catkin_ws/devel/setup.bash
 catkin_make
@@ -32,16 +33,19 @@ rosrun beginner_tutorials listener
 
 To Run as a launch file open a second terminal window and execute:
 ```
-roslaunch beginner_tutorials week10.launch
+roslaunch beginner_tutorials week11.launch
 ```
 
 This default roslaunch command will set the rate of the talker to 10hz if you would like to set it to a different value from the command line use:
 
 ```
-roslaunch beginner_tutorials week10.launch rate:=<desired hz>
+roslaunch beginner_tutorials week11.launch rate:=<desired hz>
 
 ```
-
+To start a bag file use the launch file with the following input argument
+```
+roslaunch beginner_tutorials week11.launch record_chatter:=true
+```
 
 ## Services
 
@@ -49,4 +53,15 @@ Once the launch file is running in the second terminal you can navigate to a thr
 
 ```
 rosservice call /edit_talker "<desired message>"
+
+```
+## Testing
+After completing the setup and build section run the following command
+
+```
+catkin_make run_tests
+```
+or use the launch file
+```
+roslaunch beginner_tutorials tester.launch
 ```
